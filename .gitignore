@@ -16,3 +16,4 @@
 /config/local_env.yml
 
 /lib/load_script/session.rb
+/lib/tasks/load_script.rake
