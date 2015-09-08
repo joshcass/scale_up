@@ -15,4 +15,4 @@
 /coverage/
 /config/local_env.yml
 
-/lib/load_script/
+/lib/load_script/session.rb
