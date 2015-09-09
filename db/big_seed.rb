@@ -13,10 +13,6 @@ module BigSeed
       20.times {create_orders}
     end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     def create_categories
       CATEGORIES.each do |cat|
         Category.create(title: cat, description: cat + " stuff")
