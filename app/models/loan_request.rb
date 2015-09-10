@@ -79,7 +79,7 @@ class LoanRequest < ActiveRecord::Base
 
     # LoanRequestsContributor.where(loan_request_id: self.id).pluck(:user_id).map do |user_id|
       # User.find(user_id)
-    end
+    # end
   end
 
   def related_projects
