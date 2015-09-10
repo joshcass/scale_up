@@ -61,8 +61,8 @@ module BigSeed
       @lenders ||= User.where(role: 0)
     end
 
-    def loan_requests
-      @loan_requests ||= LoanRequest.all
+    def loan_request_ids
+      @loan_requests ||= LoanRequest.pluck(:id)
     end
 
     def create_orders
@@ -70,7 +70,7 @@ module BigSeed
       5000.times do
         donation = DONATION_AMOUNTS.sample
         lender = lenders.sample
-        request_id = loan_requests.sample.id
+        request_id = loan_request_ids.sample
         order = Order.new(cart_items:
           { "#{request_id}" => donation },
           user_id: lender.id)
