@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910010333) do
+ActiveRecord::Schema.define(version: 20150910032643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150910010333) do
   end
 
   add_index "loan_requests_contributors", ["loan_request_id"], name: "index_loan_requests_contributors_on_loan_request_id", using: :btree
+  add_index "loan_requests_contributors", ["user_id", "loan_request_id"], name: "index_loan_requests_contributors_on_user_id_and_loan_request_id", using: :btree
   add_index "loan_requests_contributors", ["user_id"], name: "index_loan_requests_contributors_on_user_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
