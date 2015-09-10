@@ -11,11 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    if current_user.admin?
-      redirect_to admin_path
-    else
-      render :show
-    end
+    render :show
   end
 
   private
