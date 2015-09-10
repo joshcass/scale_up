@@ -24,6 +24,7 @@ gem "traceroute"
 gem "rails_12factor", group: :production
 gem 'newrelic_rpm'
 gem 'populator'
+gem 'dalli'
 
 group :development, :test do
   gem "pry-rails"

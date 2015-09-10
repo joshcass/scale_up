@@ -1,6 +1,6 @@
 class LoanRequestsContributor < ActiveRecord::Base
   belongs_to :loan_request
-  belongs_to :user
+  belongs_to :user, touch: true
 
   def self.lender_contribution(user_id, loan_request)
     where(user_id: user_id, loan_request_id: loan_request.id)
