@@ -25,6 +25,7 @@ module SmallSeed
       User.create(name: "Jorge", email: "jorge@example.com", password: "password")
       User.create(name: "Rachel", email: "rachel@example.com", password: "password")
       User.create(name: "Josh", email: "josh@example.com", password: "password", role: 1)
+      User.create(name: "horace", email: 'demo+horace@jumpstartlab.com', password: 'password')
     end
 
     def create_lenders(quantity)
