@@ -75,12 +75,14 @@ class LoanRequest < ActiveRecord::Base
   end
 
   def project_contributors
-    LoanRequestsContributor.where(loan_request_id: self.id).pluck(:user_id).map do |user_id|
-      User.find(user_id)
+    User.where(id: LoanRequestsContributor.where(loan_request_id: self.id).pluck(:user_id))
+
+    # LoanRequestsContributor.where(loan_request_id: self.id).pluck(:user_id).map do |user_id|
+      # User.find(user_id)
     end
   end
 
   def related_projects
-    (categories.flat_map(&:loan_requests) - [self]).shuffle.take(4)
+    categories.first.loan_requests.where.not(id: id).offset(rand(100)).limit(4)
   end
 end

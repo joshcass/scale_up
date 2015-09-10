@@ -86,7 +86,7 @@ module BigSeed
         orders << order
       end
       orders.each { |o| o.save}
-      puts 'created 10000 orders'
+      puts 'created 5000 orders'
     end
   end
 end

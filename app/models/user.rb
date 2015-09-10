@@ -19,11 +19,15 @@ class User < ActiveRecord::Base
   end
 
   def total_contributed
-    loan_requests_contributors.sum(:contribution)
+    Rails.cache.fetch("total_contributed_#{self.updated_at}") do
+      loan_requests_contributors.sum(:contribution)
+    end
   end
 
   def total_contributions_received
-    loan_requests.sum(:contributed)
+    Rails.cache.fetch("total_contributions_#{self.updated_at}") do
+      loan_requests.sum(:contributed)
+    end
   end
 
   def contributed_to(loan_request)

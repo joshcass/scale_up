@@ -26,7 +26,6 @@ module LoadScript
     end
 
     def run
-      binding.pry
       while true
         run_action(actions.sample)
       end
