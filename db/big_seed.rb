@@ -6,10 +6,10 @@ module BigSeed
     DONATION_AMOUNTS = %w(25, 50, 75, 100, 125, 150, 175, 200)
 
     def run
-      create_categories
-      10.times {create_borrowers}
-      20.times {create_lenders}
-      50.times {create_requests}
+      # create_categories
+      # 10.times {create_borrowers}
+      # 20.times {create_lenders}
+      # 50.times {create_requests}
       20.times {create_orders}
     end
 
@@ -57,12 +57,20 @@ module BigSeed
       puts 'created 10000 lenders'
     end
 
+    def lenders
+      @lenders ||= User.where(role: 0)
+    end
+
+    def loan_requests
+      @loan_requests ||= LoanRequest.all
+    end
+
     def create_orders
       orders = []
       5000.times do
         donation = DONATION_AMOUNTS.sample
-        lender = User.where(role: 0).order("RANDOM()").take(1).first
-        request_id = LoanRequest.all.sample.id
+        lender = lenders.sample
+        request_id = loan_requests.sample.id
         order = Order.new(cart_items:
           { "#{request_id}" => donation },
           user_id: lender.id)
