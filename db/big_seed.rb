@@ -6,10 +6,10 @@ module BigSeed
     DONATION_AMOUNTS = %w(25, 50, 75, 100, 125, 150, 175, 200)
 
     def run
-      # create_categories
-      # 10.times {create_borrowers}
-      # 20.times {create_lenders}
-      # 50.times {create_requests}
+      create_categories
+      10.times {create_borrowers}
+      20.times {create_lenders}
+      50.times {create_requests}
       20.times {create_orders}
     end
 
@@ -29,9 +29,17 @@ module BigSeed
       puts 'created 3000 borrowers'
     end
 
+    def borrower_ids
+      @borrower_ids ||= User.where(role: 1).pluck(:id)
+    end
+
+    def category_ids
+      @category_ids ||= Category.pluck(:id)
+    end
+
     def create_requests
       LoanRequest.populate(10000) do |request|
-        request.user_id = User.where(role: 1).order("RANDOM()").take(1).first.id
+        request.user_id = borrower_ids.sample
         request.description = Faker::Company.catch_phrase
         request.status = [0, 1]
         request.amount = 100..2000
@@ -41,7 +49,7 @@ module BigSeed
         request.repayment_begin_date = Faker::Time.between(3.days.ago, Time.now)
         LoanRequestsCategory.populate(4) do |request_cat|
           request_cat.loan_request_id = request.id
-          request_cat.category_id = Category.all.sample.id
+          request_cat.category_id = category_ids.sample
         end
       end
       puts 'created 10000 requests'
