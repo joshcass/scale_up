@@ -54,11 +54,11 @@
       <h3 class="page-header">Related Projects</h3>
     </div>
 
-    <% @loan_request.related_projects.each do |p| %>
+    <% @loan_request.related_projects.each do |loan_request| %>
       <div class="col-sm-3 col-xs-6">
-        <%= link_to loan_request_path(p) do %>
-          <img class="img-responsive portfolio-item" src=<%= p.image_url %> alt="">
-          <p><%= p.title %></p>
+        <%= link_to loan_request_path(loan_request) do %>
+          <img class="img-responsive portfolio-item" src=<%= loan_request.image_url %> alt="">
+          <p><%= loan_request.title %></p>
         <% end %>
       </div>
     <% end %>
