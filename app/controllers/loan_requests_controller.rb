@@ -1,8 +1,8 @@
 class LoanRequestsController < ApplicationController
-  before_action :set_loan_request, only: [:update, :show]
+  before_action :set_loan_request, only: [:update, :edit]
 
   def index
-    @loan_requests = LoanRequest.all
+    @loan_requests = LoanRequest.paginate(:page => params[:page], :per_page => 30)
   end
 
   def create
@@ -19,10 +19,10 @@ class LoanRequestsController < ApplicationController
   end
 
   def edit
-    @loan_request = LoanRequest.find(params[:id])
   end
 
   def show
+    @loan_request = LoanRequest.includes(:user).find(params[:id])
   end
 
   def update

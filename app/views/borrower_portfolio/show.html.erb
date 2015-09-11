@@ -27,7 +27,7 @@
         <tbody>
         <% @loan_requests.each do |loan_request| %>
           <tr>
-          <td class="text-center"><%= loan_request.updated_formatted %></td>
+          <td class="text-center"><%= loan_request.updated_at.to_formatted_s(:long)%></td>
           <td class="text-center"><%= loan_request.title %></td>
           <td class="text-center"><%= number_to_currency(loan_request.contributed) %></td>
           <td class="text-center"><%= loan_request.repayment_begin %></td>

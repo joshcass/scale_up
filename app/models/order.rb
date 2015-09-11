@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   enum status: %w(ordered paid cancelled completed)
   validate :not_over_funded
 
+  #TODO this method looks bad and slow, not sure what to do with it yet
   def not_over_funded
     return if errors.any?
     find_loan_requests.each do |loan_request|
@@ -52,6 +53,7 @@ class Order < ActiveRecord::Base
     end
   end
 
+  #TODO Def background worker here
   def send_contributed_to_email
     cart_item_and_quantity.each do |loan_request, _|
       user = User.find(loan_request.user_id)

@@ -32,7 +32,8 @@ class LendersController < ApplicationController
   end
 
   def set_lender
-    @lender = User.includes(:projects).find(params[:id])
+    @lender = User.includes(:loan_requests_contributors).find(params[:id])
+    @projects = @lender.projects.includes(:user, :categories)
   end
 
   def current_lender?

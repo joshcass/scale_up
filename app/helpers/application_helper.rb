@@ -16,3 +16,7 @@ module ApplicationHelper
     nil
   end
 end
+
+def loan_request_contributuion(loan_requests_contributors, loan_requst_id)
+  loan_requests_contributors.detect{ |l| l.loan_request_id == loan_requst_id }
+end

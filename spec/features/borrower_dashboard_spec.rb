@@ -50,7 +50,7 @@ RSpec.feature "borrower dashboard" do
     visit portfolio_path
 
     ["Total Funding Received",
-     loan_request.updated_formatted,
+     loan_request.updated_at.to_formatted_s(:long),
      loan_request.title,
      loan_request.repayment_due_date,
      "$25.00",
