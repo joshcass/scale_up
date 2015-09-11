@@ -1,4 +1,5 @@
 class PaymentController < ApplicationController
+  #current user find loan request and then pay on it
   def update
     loan_request = LoanRequest.find(params[:id])
     if loan_request.pay!(params[:payment].to_i, current_user)

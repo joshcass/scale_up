@@ -22,13 +22,13 @@
         </tr>
       </thead>
       <tbody>
-        <% @lender.projects.each do |project| %>
+        <% @projects.each do |project| %>
       <tr>
-        <td class="text-center"><%= @lender.contributed_to(project).newest_contribution %></td>
+          <td class="text-center"><%= loan_request_contributuion(@lender.loan_requests_contributors, project.id).newest_contribution %></td>
         <td class="text-center"><%= project.title %></td>
         <td class="text-center"><%= link_to "#{project.user.name}", borrower_path(project.user) %></td>
         <td class="text-center"><%= project.categories.first.title.capitalize %></td>
-        <td class="text-center"><%= number_to_currency(@lender.contributed_to(project).first.contribution) %></td>
+        <td class="text-center"><%= number_to_currency loan_request_contributuion(@lender.loan_requests_contributors, project.id).contribution %></td>
         <td class="text-center"><%= project.repayment_begin %></td>
         <td class="text-center"><%= project.repayment_rate.capitalize %></td>
       </tr>

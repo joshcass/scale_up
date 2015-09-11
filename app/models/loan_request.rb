@@ -20,14 +20,6 @@ class LoanRequest < ActiveRecord::Base
     self.user.name
   end
 
-  def requested_by
-    self.requested_by_date.strftime("%B %d, %Y")
-  end
-
-  def updated_formatted
-    self.updated_at.strftime("%B %d, %Y")
-  end
-
   def repayment_begin
     self.repayment_begin_date.strftime("%B %d, %Y")
   end
@@ -38,10 +30,6 @@ class LoanRequest < ActiveRecord::Base
 
   def self.projects_with_contributions
     where("contributed > ?", 0)
-  end
-
-  def list_project_contributors
-    project_contributors.map(&:name).to_sentence
   end
 
   def progress_percentage
@@ -60,10 +48,12 @@ class LoanRequest < ActiveRecord::Base
     (repayment_begin_date + 12.weeks).strftime("%B %d, %Y")
   end
 
+  #TODO good case for a background worker
   def pay!(amount, borrower)
     repayment_percentage = (amount / contributed.to_f)
     project_contributors.each do |lender|
-      repayment = lender.contributed_to(self).first.contribution * repayment_percentage
+      # this thing is finding the l_r_c where user and LR, how else can we handle this?
+      repayment = lender.contributed_to(self.id).first.contribution * repayment_percentage
       lender.increment!(:purse, repayment)
       borrower.decrement!(:purse, repayment)
       self.increment!(:repayed, repayment)
@@ -76,10 +66,6 @@ class LoanRequest < ActiveRecord::Base
 
   def project_contributors
     User.where(id: LoanRequestsContributor.where(loan_request_id: self.id).pluck(:user_id))
-
-    # LoanRequestsContributor.where(loan_request_id: self.id).pluck(:user_id).map do |user_id|
-      # User.find(user_id)
-    # end
   end
 
   def related_projects

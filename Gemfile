@@ -25,6 +25,7 @@ gem "rails_12factor", group: :production
 gem 'newrelic_rpm'
 gem 'populator'
 gem 'dalli'
+gem 'will_paginate', '~> 3.0.6'
 
 group :development, :test do
   gem "pry-rails"

@@ -19,8 +19,10 @@ RSpec.feature "unauthenticated user browses loan requests" do
                                            repayment_rate: "monthly",
                                            user_id: user2.id)
   }
-  before(:each) { visit browse_path }
 
+  let!(:category) { Category.create(title: "agriculture", description: "agri stuff") }
+
+  before(:each) { visit browse_path }
   scenario "can view the loan requests" do
     expect(current_path).to eq(browse_path)
     expect(page).to have_content(loan_request.title)
@@ -28,6 +30,7 @@ RSpec.feature "unauthenticated user browses loan requests" do
   end
 
   scenario "can view an individual item" do
+    loan_request.categories << category
     click_link_or_button "About"
     expect(page).to have_content(loan_request.title)
   end
@@ -101,6 +104,7 @@ RSpec.feature "unauthenticated user browses loan requests" do
   end
 
   scenario "can lend to a loan request from individual show page" do
+    loan_request.categories << category
     click_link_or_button "About"
     expect(page).to have_content("Basket 0")
     click_link_or_button "Contribute $25"
