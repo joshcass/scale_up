@@ -35,15 +35,14 @@ class Order < ActiveRecord::Base
   end
 
   def update_contributed(user)
-    user_id = user.id
     cart_item_and_quantity.each do |loan_request, contribution|
-      associate_user_with_loan_request(user_id, loan_request, contribution)
+      associate_user_with_loan_request(user, loan_request.id, contribution)
       loan_request.update_attributes(contributed: loan_request.contributed += contribution.to_i)
     end
   end
 
-  def associate_user_with_loan_request(user_id, loan_request, contribution)
-    LoanRequestsContributor.lender_contribution(user_id, loan_request).
+  def associate_user_with_loan_request(user, loan_request_id, contribution)
+    user.contributed_to(loan_request_id).
       first_or_create.increment!(:contribution, contribution.to_i)
   end
 
