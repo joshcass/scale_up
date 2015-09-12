@@ -127,8 +127,6 @@ module LoadScript
       end
     end
 
-    end
-
     def new_user_name
       "#{Faker::Name.name} #{Time.now.to_i}"
     end
