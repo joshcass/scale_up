@@ -35,7 +35,7 @@ RSpec.feature "lender portfolio page" do
   end
 
   scenario "page shows all info of a loan request that has been contributed to" do
-    [@project.title, @project.user.name, lender.contributed_to(@project.id).newest_contribution,
+    [@project.title, @project.user.name, lender.contributed_to(@project.id).first.newest_contribution,
      lender.total_contributed].each do |x|
       expect(page).to have_content(x)
     end
