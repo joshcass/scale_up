@@ -11,6 +11,7 @@ module LoadScript
     include Capybara::DSL
     attr_reader :host
     CATEGORIES = ["agriculture", "community", "education", "technology", "automotive", "retail", "b2b", "recreation", "helping", "growing", "caring", "farming", "livestock", "dairy", "recycling"]
+    EMAILS= ["demo+horace@jumpstartlab.com", "name@name.com", "joe@joe.com", "email@email.com", "stuff@things.com", "hello@world.com", "woo@hoo.com"]
 
     def initialize(host = nil)
       Capybara.default_driver = :poltergeist
@@ -110,7 +111,7 @@ module LoadScript
       end
     end
 
-    def log_in(email="demo+horace@jumpstartlab.com", pw="password")
+    def log_in(email=EMAILS.sample, pw="password")
       log_out
       session.visit host
       session.click_on("Login")

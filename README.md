@@ -8,4 +8,6 @@ The project specifications can be found [here](https://github.com/turingschool/c
 
 [Find It Here on Heroku](http://scale-it-up.herokuapp.com)
 
+9/11/15 Note: Pagination has been added along with refactoring and a few other small optimizations. Still in progress but the app is functional again.
+
 9/9/15 Note: This project is in progress, as of today the database is being seeded on Heroku but no performance optimization has been pushed to production. Most of the app will not be funcitonal yet.
