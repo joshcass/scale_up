@@ -44,11 +44,9 @@ class LoanRequest < ActiveRecord::Base
     (repayment_begin_date + 12.weeks).strftime("%B %d, %Y")
   end
 
-  #TODO good case for a background worker
   def pay!(amount, borrower)
     repayment_percentage = (amount / contributed.to_f)
     project_contributors.each do |lender|
-      # this thing is finding the l_r_c where user and LR, how else can we handle this?
       repayment = lender.contributed_to(self.id).first.contribution * repayment_percentage
       lender.increment!(:purse, repayment)
       borrower.decrement!(:purse, repayment)

@@ -8,8 +8,8 @@
             </div>
             <p><%= truncate(borrower_loan_request.description, length: 30) %></p>
             <p>
-                <%= link_to "Details", borrower_loan_request_path(borrower_loan_request), class: "btn btn-default" %>
-                <%= link_to "Edit", edit_borrower_loan_request_path(borrower_loan_request), remote: true, class: "btn btn-info pull-right" %>
+                <%= link_to "Details", loan_request_path(borrower_loan_request), class: "btn btn-default" %>
+                <%= link_to "Edit", edit_loan_request_path(borrower_loan_request), remote: true, class: "btn btn-info pull-right" %>
             </p>
             <br>
             <div class="progress">
