@@ -1,0 +1,22 @@
+<% cache borrower_loan_request do %>
+<div class="col-sm-6 col-md-4 col-lg-4">
+    <div class="thumbnail">
+        <img src=<%=borrower_loan_request.image_url %>>
+        <div class="caption">
+            <div class="thumbnail-label">
+                <h3><%= truncate(borrower_loan_request.title, length: 20) %></h3>
+            </div>
+            <p><%= truncate(borrower_loan_request.description, length: 30) %></p>
+            <p>
+                <%= link_to "Details", borrower_loan_request_path(borrower_loan_request), class: "btn btn-default" %>
+                <%= link_to "Edit", edit_borrower_loan_request_path(borrower_loan_request), remote: true, class: "btn btn-info pull-right" %>
+            </p>
+            <br>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:" data-amount="<%="#{borrower_loan_request.amount}"%>" data-contributed="<%="#{borrower_loan_request.contributed}"%>">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>

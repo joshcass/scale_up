@@ -13,8 +13,7 @@
             </p>
             <br>
             <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:<%="#{loan_request.progress_percentage}"%>%;">
-                    <%="#{loan_request.progress_percentage}%"%>
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:" data-amount="<%="#{loan_request.amount}"%>" data-contributed="<%="#{loan_request.contributed}"%>">
                 </div>
             </div>
         </div>
