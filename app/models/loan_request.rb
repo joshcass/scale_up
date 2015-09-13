@@ -32,10 +32,6 @@ class LoanRequest < ActiveRecord::Base
     where("contributed > ?", 0)
   end
 
-  def progress_percentage
-    ((1.00 - (funding_remaining.to_f / amount.to_f)) * 100).to_i
-  end
-
   def minimum_payment
     if repayment_rate == "weekly"
       (contributed - repayed) / 12
