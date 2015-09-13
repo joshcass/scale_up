@@ -3,8 +3,8 @@ class OrdersController < ApplicationController
     if current_user && current_user.lender?
       order = Order.new(cart_items: params[:cart], user_id: current_user.id)
       if order.save
-        order.update_contributed(current_user)
-        order.send_contributed_to_email
+        Resque.enqueue(OrderUpdateJob, order.id, current_user.id)
+        Resque.enqueue(OrderMailerJob, order.id)
         flash[:notice] = "Thank you for your contribution, #{current_user.name}!"
         session[:cart] = {}
         redirect_to lender_path(current_user)
