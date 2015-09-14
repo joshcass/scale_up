@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  require 'resque/server'
-  mount Resque::Server.new, at: '/resque'
-
   root "home#index"
 
   get "/browse", to: "loan_requests#index"
@@ -29,6 +26,8 @@ Rails.application.routes.draw do
   resources :borrowers
 
   resources :users, only: [:show]
+
+  resources :categories, only: [:show]
 
   get "*path", to: "home#not_found"
 end
