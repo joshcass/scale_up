@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910195222) do
+ActiveRecord::Schema.define(version: 20150914194810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20150910195222) do
     t.string "title"
     t.text   "description"
   end
+
+  add_index "categories", ["title"], name: "index_categories_on_title", using: :btree
 
   create_table "loan_requests", force: :cascade do |t|
     t.text     "title"
