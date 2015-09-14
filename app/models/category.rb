@@ -3,4 +3,16 @@ class Category < ActiveRecord::Base
   validates :title, uniqueness: true
   has_many :loan_requests_categories
   has_many :loan_requests, through: :loan_requests_categories
+
+  def self.all_categories
+    Rails.cache.fetch("all_categories-#{Category.last.id}") do
+      self.all
+    end
+  end
+
+  def all_requests
+    Rails.cache.fetch("all_requests-#{self.id}") do
+      self.loan_requests
+    end
+  end
 end

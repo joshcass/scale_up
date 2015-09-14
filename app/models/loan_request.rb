@@ -12,6 +12,12 @@ class LoanRequest < ActiveRecord::Base
   enum repayment_rate: %w(monthly weekly)
   before_create :assign_default_image
 
+  def self.all_requests
+    Rails.cache.fetch("all_requests-#{LoanRequest.last.id}") do
+      self.all
+    end
+  end
+
   def assign_default_image
     self.image_url = DefaultImages.random if self.image_url.nil? || self.image_url.empty?
   end
