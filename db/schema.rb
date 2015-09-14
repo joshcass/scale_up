@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914194810) do
+ActiveRecord::Schema.define(version: 20150914202501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150914194810) do
     t.string   "image_url"
   end
 
+  add_index "loan_requests", ["contributed"], name: "index_loan_requests_on_contributed", using: :btree
   add_index "loan_requests", ["user_id"], name: "index_loan_requests_on_user_id", using: :btree
 
   create_table "loan_requests_categories", force: :cascade do |t|

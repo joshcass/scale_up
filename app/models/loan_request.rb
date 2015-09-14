@@ -13,7 +13,7 @@ class LoanRequest < ActiveRecord::Base
   before_create :assign_default_image
 
   def self.all_requests
-    Rails.cache.fetch("all_requests-#{LoanRequest.last.id}") do
+    Rails.cache.fetch("all_requests-#{LoanRequest.last.id}", expires_in: 1.day) do
       self.all
     end
   end
