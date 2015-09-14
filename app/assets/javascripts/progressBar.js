@@ -18,7 +18,6 @@ function calcPercentages(){
         $(this).fadeIn('slow', function(){
             $(this).text(percent + '%');
         });
-        console.log('loaded!');
     });
 };
 
