@@ -1,27 +1,29 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-3 pull-left">
-      <a href="#" class="btn btn-info" role="button" data-toggle="modal" data-target="#loanRequestModal">Create Loan Request</a>
+    <div class="row">
+        <div class="col-md-3 pull-left">
+            <a href="#" class="btn btn-info" role="button" data-toggle="modal" data-target="#loanRequestModal">Create Loan Request</a>
+        </div>
+
+        <%= render "shared/search" %>
+
     </div>
-
-    <%= render "shared/search" %>
-
-  </div>
 </div>
 
 <br>
 
 <div class="container" id="loanRequests">
-  <div class="row">
-<%= render partial: "shared/borrower_loan_request", collection: @loan_requests %>
+    <div class="row">
+        <% cache @borrower.loan_requests do %>
+            <%= render partial: "shared/borrower_loan_request", collection: @borrower.loan_requests %>
+        <% end %>
 
-<!-- Create Loan Request Modal -->
-<div class="modal fade" id="loanRequestModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= render "new_loan_request" %>
-    </div>
-  </div>
-</div>
+        <!-- Create Loan Request Modal -->
+        <div class="modal fade" id="loanRequestModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <%= render "new_loan_request" %>
+                </div>
+            </div>
+        </div>
 
-<div id="loan-request-modal" class="modal fade"></div>
+        <div id="loan-request-modal" class="modal fade"></div>

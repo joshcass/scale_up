@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
         Resque.enqueue(OrderMailerJob, order.id)
         flash[:notice] = "Thank you for your contribution, #{current_user.name}!"
         session[:cart] = {}
-        redirect_to lender_path(current_user)
+        redirect_to browse_path
       else
         flash[:notice] = order.errors.full_messages.to_sentence
         redirect_to cart_path
