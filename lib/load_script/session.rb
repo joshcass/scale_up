@@ -53,22 +53,24 @@ module LoadScript
     end
 
     def browse_loan_requests
+      session.visit "#{host}/browse"
       10.times do
-        session.visit "#{host}/browse"
         session.within('#pageLinks') do
           session.all('a').sample.click
         end
         session.all(".lr-about").sample.click
+        session.visit "#{host}/browse"
       end
     end
 
     def browse_categories
+      session.visit "#{host}/browse"
       10.times do
-        session.visit "#{host}/browse"
         session.within('#categories') do
           session.all('a').sample.click
         end
         session.all(".lr-about").sample.click
+        session.visit "#{host}/browse"
       end
     end
 
@@ -85,7 +87,6 @@ module LoadScript
     end
 
     def browse_pages_of_loan_requests
-      log_in
       session.visit "#{host}/browse"
       10.times do
         session.within('#pageLinks') do
