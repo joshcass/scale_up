@@ -12,7 +12,8 @@ RSpec.describe Order, type: :model do
                                              user_id: borrower.id)
     }
     let(:borrower) { User.create(email: "example@example.com", password: "password", name: "sally", role: 1) }
-    let(:order) { Order.create(user_id: 1, cart_items: { "#{loan_request.id }" => 25 }) }
+    let(:lender) { User.create(email: "joe@example.com", password: "password", name: "joe", role: 0) }
+    let(:order) { Order.create(user_id: "#{lender.id}", cart_items: { "#{loan_request.id }" => 25 }) }
 
     scenario "it is valid" do
       expect(order).to be_valid
@@ -23,8 +24,9 @@ RSpec.describe Order, type: :model do
       expect(order.updated_at_formatted.class).to eq(String)
     end
 
-    scenario "it can find the borrower" do
-      expect(order.find_borrower).to eq([borrower])
+    it 'can update contributed users' do
+      order.update_contributed(lender)
+      expect(lender.total_contributed).to eq(25)
     end
   end
 

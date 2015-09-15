@@ -157,5 +157,22 @@ RSpec.describe LoanRequest, type: :model do
         expect(loan_request.minimum_payment).to eq(x)
       end
     end
+
+    it "can make a loan payment" do
+      borrower = User.create(name: "Josh", email: "josh@example.com", password: "password", role: "borrower")
+      lender = User.create(name: "Joe", email: "joe@example.com", password: "password", role: "lender")
+
+      request = borrower.loan_requests.create(title: "Farm Tools",
+                                description: "help out with the farm tools",
+                                amount: "100",
+                                requested_by_date: "2015-06-01",
+                                repayment_begin_date: "2015-12-01",
+                                repayment_rate: "monthly",
+                                contributed: "30")
+      lender.contributed_to(request.id).first_or_create.increment!(:contribution, 100)
+      request.pay!(25, borrower)
+
+      expect(request.repayed).to eq(83)
+    end
   end
 end
