@@ -6,7 +6,7 @@
     <div class="container" id="categories">
         <div class="row">
             <div class="pull-left">
-                <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group btn-group-sm" role="group" aria-label="...">
                     <%= link_to 'All', browse_path, class: "btn btn-default" %>
                     <% @categories.each do |category| %>
                         <%= link_to category.title.titleize, category, class: "btn btn-default" %>

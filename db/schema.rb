@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914202501) do
+ActiveRecord::Schema.define(version: 20150915192826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
   create_table "categories", force: :cascade do |t|
-    t.string "title"
-    t.text   "description"
+    t.string  "title"
+    t.text    "description"
+    t.integer "loan_requests_categories_count", default: 0
   end
 
   add_index "categories", ["title"], name: "index_categories_on_title", using: :btree
