@@ -9,10 +9,4 @@ class Category < ActiveRecord::Base
       self.all
     end
   end
-
-  def all_requests
-    Rails.cache.fetch("all_requests-#{self.id}", expires_in: 1.day) do
-      self.loan_requests
-    end
-  end
 end

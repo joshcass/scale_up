@@ -28,7 +28,9 @@
 
 <div class="container" id="loanRequests">
     <div class="row">
-        <%= render partial: "shared/loan_request", collection: @loan_requests %>
+        <% cache @loan_requests do %>
+            <%= render partial: "shared/loan_request", collection: @loan_requests %>
+        <% end %>
     </div>
 </div>
 
