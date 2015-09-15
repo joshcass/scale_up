@@ -11,6 +11,18 @@ class LoanRequest < ActiveRecord::Base
   enum status: %w(active funded)
   enum repayment_rate: %w(monthly weekly)
   before_create :assign_default_image
+  after_destroy :invalidate_count_cache
+  after_create :invalidate_count_cache
+
+  def self.all_count
+    Rails.cache.fetch("all_loan_requests_count", expires_in: 1.day) do
+      self.count
+    end
+  end
+
+  def invalidate_count_cache
+    Rails.cache.delete("all_loan_requests_count")
+  end
 
   def assign_default_image
     self.image_url = DefaultImages.random if self.image_url.nil? || self.image_url.empty?
