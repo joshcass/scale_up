@@ -7,8 +7,9 @@ unless Rails.env.production?
       if `which phantomjs`.empty?
         raise "PhantomJS not found. Make sure you have it installed. Try: 'brew install phantomjs'"
       end
-      4.times.map do
+      4.times.map do |i|
         Thread.new do
+          puts "Thread #{i} starting..."
           LoadScript::Session.new(ARGV[1]).run
         end
       end.map(&:join)
