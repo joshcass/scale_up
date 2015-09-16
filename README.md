@@ -9,5 +9,6 @@ The original source code can be found [here](https://github.com/turingschool-exa
 The project specifications can be found [here](https://github.com/turingschool/curriculum/blob/master/source/projects/the_scale_up.markdown)
 
 [Find It Here on Heroku](http://scale-it-up.herokuapp.com)
+(NOTE: Initial load times may be slow as the app may have been put to sleep by Heroku)
 
 <img src="http://joshcass.com/wp-content/uploads/2015/09/ScaleUp.gif" />
