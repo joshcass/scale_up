@@ -22,9 +22,10 @@ class Order < ActiveRecord::Base
   end
 
   def cart_item_and_quantity
-    loan_requests = Hash.new
-    cart_items.select { |loan_id, amount| loan_requests[LoanRequest.find(loan_id)] = amount }
-    loan_requests
+    cart_items.reduce({}) do |hash, (loan_request_id, amount)|
+      hash[LoanRequest.find(loan_request_id)] = amount
+      hash
+    end
   end
 
   def update_contributed(user)
