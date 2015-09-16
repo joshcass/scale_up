@@ -10,4 +10,4 @@ The project specifications can be found [here](https://github.com/turingschool/c
 
 [Find It Here on Heroku](http://scale-it-up.herokuapp.com)
 
-http://joshcass.com/wp-content/uploads/2015/09/ScaleUp.gif
+<img src="http://joshcass.com/wp-content/uploads/2015/09/ScaleUp.gif" />
